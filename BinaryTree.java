@@ -243,20 +243,32 @@ public class BinaryTree {
      */
 
     /**
+     * Check the node's data, check the node's left node's data, check the node's
+     * right node's data, if any are less than minimum set new minimum value
      * 
-     * Starting at root, set minimum to root's data, traverse left side and compare each node's data, 
-     * if it's less than the previous minimum make it the new minimum. Repeat process for 
-     * right side.
-     *
-     * Check node, check left check right 
+     * Repeat this process by calling function within itself, call the function with 
+     * the node's left and right nodes after checking to see if they are null
+     * 
      */
 
     private int findMinHelper(Node node) {
-
-        // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
-        // BINARY TREE (WHICH IS BASED ON RECURSION)
-
-        return Integer.MAX_VALUE;
+        if (root.data = null){
+            return Integer.MAX_VALUE;
+        }
+        int minimum = node.data;
+        if (node.left.data < minimum){
+            minimum = node.left.data;
+        }
+        if (node.right.data < minimum){
+            minimum = node.right.data;
+        }
+        if (node.left != null){
+            findMinHelper(node.left);
+        }
+        if(node.right != null){
+            findMinHelper(node.right);
+        }
+        return minimum;
     }
 
 
