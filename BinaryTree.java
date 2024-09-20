@@ -252,9 +252,6 @@ public class BinaryTree {
      */
 
     private int findMinHelper(Node node) {
-        if (root.data = null){
-            return Integer.MAX_VALUE;
-        }
         int minimum = node.data;
         if (node.left.data < minimum){
             minimum = node.left.data;
