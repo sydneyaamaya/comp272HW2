@@ -1,6 +1,6 @@
 
 /*
- * *** PLACE YOUR NAME / SECTION HERE ***
+ * *** Sydney Amaya / 001 ***
  *
  * Homework # 2 (Programming Assignment). This Java class defines a few basic
  * manipulation operations of a binary trees.
@@ -20,7 +20,7 @@ import java.util.LinkedList;
  * that each node within the tree has a degree of 0, 1, or 2. A node of degree
  * zero (0) is called a terminal node, or leaf node.
  *
- * Each non-leaf node is often called a branch node, which will have  either one or
+ * Each non-leaf node is often called a branch node, which will have either one or
  * two children (a left and right child node). There is no order guarantee within
  * this basic binary tree object. Given that this binary object is NOT a Binary Search Tree (BST), there is
  * no guarantee on order in the tree.
