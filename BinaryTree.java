@@ -242,6 +242,15 @@ public class BinaryTree {
      * in very few lines of code.
      */
 
+    /**
+     * 
+     * Starting at root, set minimum to root's data, traverse left side and compare each node's data, 
+     * if it's less than the previous minimum make it the new minimum. Repeat process for 
+     * right side.
+     *
+     * Check node, check left check right 
+     */
+
     private int findMinHelper(Node node) {
 
         // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
