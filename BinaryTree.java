@@ -213,18 +213,30 @@ public class BinaryTree {
      *
      * This method will traverse the tree using a depth first search
      * approach, and for each node found with the value of 'oldVal',
-     * replace it (update teh value in place), with the provided 'newVal'.
+     * replace it (update the value in place), with the provided 'newVal'.
      *
      * Depth first search of the tree is based on recursion. This will result
      * in very few lines of code.
      *
      */
 
+
     private void replaceValueHelper(Node node, int oldVal, int newVal) {
-
-        // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
-        // BINARY TREE (WHICH IS BASED ON RECURSION)
-
+        //Use depth first search traversal and in order traversal 
+        //visit left subtree, visit node, visit right subtree
+        //start with recursion on the left subtree
+        if (node.left != null){
+            replaceValueHelper(node.left, oldVal, newVal);
+        }
+        //check the current node to see if data = old val and if so 
+        //replace with newVal
+        if (node.data == oldVal){
+            node.data = newVal;
+        }
+        //recursion on the right subtree
+        if (node.right != null){
+           replaceValueHelper(node.right, oldVal, newVal);
+        }
     }
 
 
@@ -242,28 +254,24 @@ public class BinaryTree {
      * in very few lines of code.
      */
 
-    /**
-     * Check the node's data, check the node's left node's data, check the node's
-     * right node's data, if any are less than minimum set new minimum value
-     * 
-     * Repeat this process by calling function within itself, call the function with 
-     * the node's left and right nodes after checking to see if they are null
-     * 
-     */
-
     private int findMinHelper(Node node) {
+        //check to see if the param is null
+        if (node == null){
+            return Integer.MAX_VALUE;
+        }
+        //create and set int minium to the param's data value
         int minimum = node.data;
-        if (node.left.data < minimum){
-            minimum = node.left.data;
+        //recursion on left subtree
+        findMinHelper(node.left);
+        //compare current node's data to current minimum value
+        //and if data is < minimum set data value as new minimum
+        if(node.data < minimum){
+            minimum = node.data;
         }
-        if (node.right.data < minimum){
-            minimum = node.right.data;
-        }
-        if (node.left != null){
-            findMinHelper(node.left);
-        }
-        if(node.right != null){
-            findMinHelper(node.right);
+        //recurion on right subtree
+        findMinHelper(node.right);   
+        if(node.data < minimum){
+            minimum = node.data;
         }
         return minimum;
     }
@@ -283,14 +291,26 @@ public class BinaryTree {
      */
 
     private int nodesGTHelper(Node node, int val) {
-
-        // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
-        // BINARY TREE (WHICH IS BASED ON RECURSION)
-
-        // return -1; // RECALL, IF TREE IS EMPTY, RETURN -1
-
-
-        return -1;
+        //check if tree is empty
+        if (node == null){
+            return -1;
+        }
+        //create an initialzie int variable to track how many nodes contain 
+        //a value greater than param val
+        int counter = 0;
+        //recursion on left subtree of param node
+        nodesGTHelper(node.left, val);
+        //compare node's data to val and if it is greater than val update
+        //counter
+        if (node.data > val){
+            counter++;
+        }
+        //recursion on right subtree of param node
+        nodesGTHelper(node.right, val);
+        if(node.data > val){
+            counter++;
+        }
+        return counter;
     }
 
 
@@ -329,6 +349,21 @@ public class BinaryTree {
         // COUNT LOCATIONS IN THE RETURNED ARRAY AS SHOWN BELOW, ELSE
         // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
 
-        return new int[]{0, 0};
+        //check if tree is empty and if so return 0 for both sum and count locations
+        if(n == null){
+            return new int[]{0, 0};
+        }
+        //create and initialize sum and count variables
+        int sum = 0;
+        int count = 0;
+        //recursion of left subtree 
+        averageHelper(n.left);
+        sum = sum + n.data;
+        count++;
+        //recursion on right subtree
+        averageHelper(n.right);
+        sum = sum + n.data;
+        count++;
+        return new int[]{sum, count};
     }
 }
