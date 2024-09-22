@@ -295,17 +295,35 @@ public class BinaryTree {
      * in very few lines of code.
      */
 
+    /*
+     * Pseudo-code:
+     * check if tree is empty
+     *   if (node == null)
+     * traverse left side and store number of nodes > val 
+     *   left = nodesGTHelper(node.left, val)
+     * traverse right side and store number of node > val
+     *   right =  nodesGTHelper(node.right, val)
+     * compare node's data to val if > update count
+     *   if(node.data > val) count++
+     * add node's data (count) with left and right to get total nodes > val
+     */
+
     private int nodesGTHelper(Node node, int val) {
         //check if tree is empty
-        if (node == null){
-            return 0;
-        }
         int count = 0;
+        int left = 0;
+        int right = 0;
         if (node.data > val){
             count++;
         }
-        return count + nodesGTHelper(node.left, val) + nodesGTHelper(node.right, val);
-    }
+        if (node.left != null){
+            left = nodesGTHelper(node.left, val);
+        }
+        if (node.right != null){
+            right = nodesGTHelper(node.right, val);
+        }
+        return count + left + right;
+     }
 
 
     /*
@@ -329,6 +347,22 @@ public class BinaryTree {
      * in very few lines of code within the helper method.
      */
 
+    /*
+     * Pseudo-code:
+     * Note to self: must return int [] when calling averageHelper for recursion
+     * 
+     * check if tree is empty if so return 0 for both indexes
+     *  if (root == null) return {0,0}
+     * traverse left using recursion, use int [] 
+     *  some int [] = averageHelper(n.left)
+     * traverse right using recursion, use int []
+     *  some int[] = averageHelper(n.right)
+     * add sum of data
+     *  sum = node data + left data + right data
+     * update count
+     *  count = node + left + right
+     */
+
     public double average() {
         int[] sumAndCount = averageHelper(root);
         return (double) sumAndCount[0] / sumAndCount[1];
@@ -336,9 +370,24 @@ public class BinaryTree {
 
     private int[] averageHelper(Node n) {
         //check if tree is empty and if so return 0 for both sum and count locations
+        if (root == null){
+            return new int [] {0, 0};
+        }
         int count = 0;
         int sum = 0;
-       
-        return new int[] {sum,count};
+        //create an initialize int arrays to store sum and count variables as 
+        //recursion takes place
+        int [] left = new int[2];
+        int [] right = new int[2];
+        if (n.left != null){
+           left = averageHelper(n.left);
+        }
+        if (n.right != null){
+           right = averageHelper(n.right);
+        }
+        //add the node's data, the data from the left, and the data from the right
+        sum = n.data + left[0] + right[0];
+        count = 1 + left[1] + right [1];
+        return new int[] {sum, count};
     }
 }
