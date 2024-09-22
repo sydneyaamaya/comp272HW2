@@ -253,27 +253,32 @@ public class BinaryTree {
      * Depth first search of the tree is based on recursion. This will result
      * in very few lines of code.
      */
-
+    
+    /*
+     * Pseudo-code:
+     * check if tree is empty
+     *   if (root == null)
+     * find the minimum value in the left subtree using recursion 
+     *   findMinHelper(node.left)
+     * find the minimum value in right subtree using recursion
+     *   findMinHelper(node.right)
+     * compare all three datas
+     *   Math.min(node.data(Math.min(leftmin, rightmin)))
+     */
     private int findMinHelper(Node node) {
-        //check to see if the param is null
-        if (node == null){
+        //check to see if the tree is empty
+        if (root == null){
             return Integer.MAX_VALUE;
         }
-        //create and set int minium to the param's data value
-        int minimum = node.data;
-        //recursion on left subtree
-        findMinHelper(node.left);
-        //compare current node's data to current minimum value
-        //and if data is < minimum set data value as new minimum
-        if(node.data < minimum){
-            minimum = node.data;
+        int leftMin = 0;
+        int rightMin = 0;
+        if (node.left != null){
+           leftMin = findMinHelper(node.left);
         }
-        //recurion on right subtree
-        findMinHelper(node.right);   
-        if(node.data < minimum){
-            minimum = node.data;
+        if(node.right != null){
+           rightMin = findMinHelper(node.right);
         }
-        return minimum;
+        return Math.min(node.data,(Math.min(leftMin, rightMin)));
     }
 
 
@@ -290,26 +295,39 @@ public class BinaryTree {
      * in very few lines of code.
      */
 
+    /*
+     * Pseudo code:
+     * use Math.max somehow
+     * 
+     * check if tree is empty and if so return -1
+     *   if(root == null)
+     * find the number of nodes greater than val in the left subtree using recursion
+     *   int leftCounter = nodesGTHelper(node.left) 
+     * find the number of nodes greater than val in the right subtree using recursion
+     *   int rightCounter = nodesGTHelper(node.right)
+     * Add both counters together 
+     *   return leftCounter + rightCounter
+     * 
+     * if true update counter
+     */
+
     private int nodesGTHelper(Node node, int val) {
         //check if tree is empty
-        if (node == null){
+        if(root == null){
             return -1;
         }
-        //create an initialzie int variable to track how many nodes contain 
-        //a value greater than param val
-        int counter = 0;
-        //recursion on left subtree of param node
-        nodesGTHelper(node.left, val);
-        //compare node's data to val and if it is greater than val update
-        //counter
-        if (node.data > val){
-            counter++;
+        boolean leftGT = false;
+        boolean rightGT = true;
+        if (node.left != null){
+            nodesGTHelper(node.left, val);
+
         }
-        //recursion on right subtree of param node
-        nodesGTHelper(node.right, val);
-        if(node.data > val){
-            counter++;
+        if(node.right != null){
+            nodesGTHelper(node.right, val);
+            
+
         }
+    
         return counter;
     }
 
@@ -350,20 +368,19 @@ public class BinaryTree {
         // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
 
         //check if tree is empty and if so return 0 for both sum and count locations
+        int sum = 0;
+        int count = 0;
         if(n == null){
             return new int[]{0, 0};
         }
-        //create and initialize sum and count variables
-        int sum = 0;
-        int count = 0;
-        //recursion of left subtree 
-        averageHelper(n.left);
+        if(n.left != null){
+            averageHelper(n.left);
+        }
         sum = sum + n.data;
         count++;
-        //recursion on right subtree
-        averageHelper(n.right);
-        sum = sum + n.data;
-        count++;
+        if(n.right != null){
+            averageHelper(n.right);
+        }
         return new int[]{sum, count};
     }
 }
