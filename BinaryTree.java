@@ -295,40 +295,16 @@ public class BinaryTree {
      * in very few lines of code.
      */
 
-    /*
-     * Pseudo code:
-     * use Math.max somehow
-     * 
-     * check if tree is empty and if so return -1
-     *   if(root == null)
-     * find the number of nodes greater than val in the left subtree using recursion
-     *   int leftCounter = nodesGTHelper(node.left) 
-     * find the number of nodes greater than val in the right subtree using recursion
-     *   int rightCounter = nodesGTHelper(node.right)
-     * Add both counters together 
-     *   return leftCounter + rightCounter
-     * 
-     * if true update counter
-     */
-
     private int nodesGTHelper(Node node, int val) {
         //check if tree is empty
-        if(root == null){
-            return -1;
+        if (node == null){
+            return 0;
         }
-        boolean leftGT = false;
-        boolean rightGT = true;
-        if (node.left != null){
-            nodesGTHelper(node.left, val);
-
+        int count = 0;
+        if (node.data > val){
+            count++;
         }
-        if(node.right != null){
-            nodesGTHelper(node.right, val);
-            
-
-        }
-    
-        return counter;
+        return count + nodesGTHelper(node.left, val) + nodesGTHelper(node.right, val);
     }
 
 
@@ -359,28 +335,10 @@ public class BinaryTree {
     }
 
     private int[] averageHelper(Node n) {
-
-        // ADD YOUR CODE HERE -- USE DEPTH FIRST SEARCH OF
-        // BINARY TREE (WHICH IS BASED ON RECURSION)
-
-        // RECALL, IF THE TREE IS EMPTY, RETURN 0 FOR BOTH THE SUM AND
-        // COUNT LOCATIONS IN THE RETURNED ARRAY AS SHOWN BELOW, ELSE
-        // THE 'SUM' IS RETURNED IN INDEX LOCATION 0, AND COUNT IS LOCATION 1
-
         //check if tree is empty and if so return 0 for both sum and count locations
-        int sum = 0;
         int count = 0;
-        if(n == null){
-            return new int[]{0, 0};
-        }
-        if(n.left != null){
-            averageHelper(n.left);
-        }
-        sum = sum + n.data;
-        count++;
-        if(n.right != null){
-            averageHelper(n.right);
-        }
-        return new int[]{sum, count};
+        int sum = 0;
+       
+        return new int[] {sum,count};
     }
 }
