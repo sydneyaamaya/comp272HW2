@@ -220,7 +220,6 @@ public class BinaryTree {
      *
      */
 
-
     private void replaceValueHelper(Node node, int oldVal, int newVal) {
         //Use depth first search traversal and in order traversal 
         //visit left subtree, visit node, visit right subtree
@@ -262,7 +261,7 @@ public class BinaryTree {
      *   findMinHelper(node.left)
      * find the minimum value in right subtree using recursion
      *   findMinHelper(node.right)
-     * compare all three datas
+     * compare all three values
      *   Math.min(node.data(Math.min(leftmin, rightmin)))
      */
     private int findMinHelper(Node node) {
